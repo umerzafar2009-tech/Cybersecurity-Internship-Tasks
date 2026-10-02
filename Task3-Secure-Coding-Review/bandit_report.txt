@@ -1,0 +1,103 @@
+Run started:2026-10-01 17:03:06.279062+00:00
+
+Test results:
+>> Issue: [B404:blacklist] Consider possible security implications associated with the subprocess module.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_imports.html#b404-import-subprocess
+   Location: ./vulnerable_app.py:14:0
+13	import hashlib
+14	import subprocess
+15	
+
+--------------------------------------------------
+>> Issue: [B105:hardcoded_password_string] Possible hardcoded password: 'SuperSecret123'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html
+   Location: ./vulnerable_app.py:20:17
+19	ADMIN_USERNAME = "admin"
+20	ADMIN_PASSWORD = "SuperSecret123"   # Hardcoded password in source code
+21	DATABASE_API_KEY = "sk_live_51H8xJ2KzL9mPq3RvT7wY"  # Hardcoded API key
+
+--------------------------------------------------
+>> Issue: [B608:hardcoded_sql_expressions] Possible SQL injection vector through string-based query construction.
+   Severity: Medium   Confidence: Low
+   CWE: CWE-89 (https://cwe.mitre.org/data/definitions/89.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b608_hardcoded_sql_expressions.html
+   Location: ./vulnerable_app.py:31:12
+30	    # Directly inserting user input into SQL query (no sanitization)
+31	    query = "SELECT * FROM users WHERE username = '" + username + "'"
+32	    cursor.execute(query)
+
+--------------------------------------------------
+>> Issue: [B324:hashlib] Use of weak MD5 hash for security. Consider usedforsecurity=False
+   Severity: High   Confidence: High
+   CWE: CWE-327 (https://cwe.mitre.org/data/definitions/327.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b324_hashlib.html
+   Location: ./vulnerable_app.py:43:11
+42	    # MD5 is cryptographically broken, should never be used for passwords
+43	    return hashlib.md5(password.encode()).hexdigest()
+44	
+
+--------------------------------------------------
+>> Issue: [B605:start_process_with_a_shell] Starting a process with a shell, possible injection detected, security issue.
+   Severity: High   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b605_start_process_with_a_shell.html
+   Location: ./vulnerable_app.py:52:13
+51	    command = "ping -c 1 " + hostname
+52	    result = os.system(command)
+53	    return result
+
+--------------------------------------------------
+>> Issue: [B307:blacklist] Use of possibly insecure function - consider using safer ast.literal_eval.
+   Severity: Medium   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_calls.html#b307-eval
+   Location: ./vulnerable_app.py:71:13
+70	    # Using eval() on user input is extremely dangerous
+71	    result = eval(user_input)
+72	    return result
+
+--------------------------------------------------
+>> Issue: [B110:try_except_pass] Try, Except, Pass detected.
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b110_try_except_pass.html
+   Location: ./vulnerable_app.py:85:4
+84	        return False
+85	    except:
+86	        # Bare except silently hides all errors, including security issues
+87	        pass
+88	
+
+--------------------------------------------------
+>> Issue: [B602:subprocess_popen_with_shell_equals_true] subprocess call with shell=True identified, security issue.
+   Severity: High   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b602_subprocess_popen_with_shell_equals_true.html
+   Location: ./vulnerable_app.py:94:13
+93	def list_directory(path):
+94	    result = subprocess.run("ls -la " + path, shell=True, capture_output=True)
+95	    return result.stdout
+
+--------------------------------------------------
+
+Code scanned:
+	Total lines of code: 50
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 3
+		Medium: 2
+		High: 3
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 1
+		Medium: 1
+		High: 6
+Files skipped (0):

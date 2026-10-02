@@ -1,0 +1,81 @@
+Run started:2026-10-01 19:00:56.941198+00:00
+
+Test results:
+>> Issue: [B404:blacklist] Consider possible security implications associated with the subprocess module.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_imports.html#b404-import-subprocess
+   Location: ./secure_app.py:14:0
+13	import hashlib
+14	import subprocess
+15	import shlex
+
+--------------------------------------------------
+>> Issue: [B607:start_process_with_partial_path] Starting a process with a partial executable path
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b607_start_process_with_partial_path.html
+   Location: ./secure_app.py:76:13
+75	    # No shell=True, arguments passed as a list (prevents injection)
+76	    result = subprocess.run(
+77	        ["ping", "-c", "1", hostname],
+78	        capture_output=True,
+79	        text=True,
+80	        timeout=5
+81	    )
+82	    return result.stdout
+
+--------------------------------------------------
+>> Issue: [B603:subprocess_without_shell_equals_true] subprocess call - check for execution of untrusted input.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b603_subprocess_without_shell_equals_true.html
+   Location: ./secure_app.py:76:13
+75	    # No shell=True, arguments passed as a list (prevents injection)
+76	    result = subprocess.run(
+77	        ["ping", "-c", "1", hostname],
+78	        capture_output=True,
+79	        text=True,
+80	        timeout=5
+81	    )
+82	    return result.stdout
+
+--------------------------------------------------
+>> Issue: [B607:start_process_with_partial_path] Starting a process with a partial executable path
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b607_start_process_with_partial_path.html
+   Location: ./secure_app.py:144:13
+143	
+144	    result = subprocess.run(["ls", "-la", target], capture_output=True, text=True)
+145	    return result.stdout
+
+--------------------------------------------------
+>> Issue: [B603:subprocess_without_shell_equals_true] subprocess call - check for execution of untrusted input.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b603_subprocess_without_shell_equals_true.html
+   Location: ./secure_app.py:144:13
+143	
+144	    result = subprocess.run(["ls", "-la", target], capture_output=True, text=True)
+145	    return result.stdout
+
+--------------------------------------------------
+
+Code scanned:
+	Total lines of code: 83
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 5
+		Medium: 0
+		High: 0
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 5
+Files skipped (0):
