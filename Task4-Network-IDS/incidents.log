@@ -1,0 +1,21 @@
+[2026-10-04 05:09:44] INCIDENT DETECTED
+  Signature : ICMP Ping Detected - Possible Network Scan
+  Source IP : 192.168.227.128
+  Dest IP   : 142.251.37.142
+  Severity  : 3
+  Action    : Logged + Flagged for review
+------------------------------------------------------------
+[2026-10-04 05:09:44] INCIDENT DETECTED
+  Signature : ICMP Ping Detected - Possible Network Scan
+  Source IP : 142.251.37.142
+  Dest IP   : 192.168.227.128
+  Severity  : 3
+  Action    : Logged + Flagged for review
+------------------------------------------------------------
+[2026-10-04 05:10:51] INCIDENT DETECTED
+  Signature : ICMP Ping Detected - Possible Network Scan
+  Source IP : fe80:0000:0000:0000:020c:29ff:fe55:2e80
+  Dest IP   : ff02:0000:0000:0000:0000:0000:0000:0002
+  Severity  : 3
+  Action    : Logged + Flagged for review
+------------------------------------------------------------
